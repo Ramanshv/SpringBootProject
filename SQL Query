@@ -1,0 +1,28 @@
+POST https://bfhldevapigw.healthrx.co.in/hiring/testWebhook/JAVA
+
+Headers :
+Authorization : eyJhbGciOiJIUzI1NiJ9.eyJyZWdObyI6IlJFRzEyMzQ2IiwibmFtZSI6IkpvaG4gRG9lIiwiZW1haWwiOiJqb2huQGV4YW1wbGUuY29tIiwic3ViIjoid2ViaG9vay11c2VyIiwiaWF0IjoxNzU2NDQ3MDIwLCJleHAiOjE3NTY0NDc5MjB9.lVd_eMF95L36OyjfKy6NTsm1lGGqU1wAzHkL9eTfBx4
+Content - Type : application / json
+
+Body :
+{
+" finalQuery ": " SELECT 
+    e1.EMP_ID,
+    e1.FIRST_NAME,
+    e1.LAST_NAME,
+    d.DEPARTMENT_NAME,
+    COUNT(e2.EMP_ID) AS YOUNGER_EMPLOYEES_COUNT
+FROM EMPLOYEE e1
+JOIN DEPARTMENT d 
+    ON e1.DEPARTMENT = d.DEPARTMENT_ID
+LEFT JOIN EMPLOYEE e2 
+    ON e1.DEPARTMENT = e2.DEPARTMENT
+   AND e2.DOB > e1.DOB
+GROUP BY 
+    e1.EMP_ID, 
+    e1.FIRST_NAME, 
+    e1.LAST_NAME, 
+    d.DEPARTMENT_NAME
+ORDER BY e1.EMP_ID DESC;
+"
+}
